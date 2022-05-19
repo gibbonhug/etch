@@ -4,11 +4,12 @@
     justify-content: center;
     align-items: center;
     gap: 25px;
-    background-color: red;
+    background-color: purple;
+    min-height: 100vh; /* fill screen */
 }
 
 #etchContainer {
-    padding: 10px;
+    padding: 15px; /* 'border' of picture */
     background-color: gray;
     display: grid;
     grid-template-columns: repeat(16, 62px);
@@ -21,9 +22,30 @@
     background-color: white;
 }
 
-#optionsContainer {
+.row {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: center;
+    align-items: center;
     gap: 25px;
+}
+
+#optionsContainer {
+    gap: 25px;
+}
+
+#sliderContainer {
+    gap: 10px;
+}
+
+#slider {
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    opacity: 0.8;
+    -webkit-transition: .1s; /* 0.2 seconds transition on hover */
+    transition: opacity .1s;
+}
+
+#slider:hover {
+    opacity: 1;
 }

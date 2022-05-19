@@ -25,7 +25,7 @@ function calcDivHeight(dimension) {
 
 function createEtchDivs(totalDimension) {
     // remove old divs
-    removeEdgeDivs();
+    removeEtchDivs();
     // calculate how many divs total we will make
     totalNumDiv = calcDivNumber(totalDimension); 
     // calculate how large we want each div to be
@@ -43,12 +43,11 @@ function createEtchDivs(totalDimension) {
         etchDiv.style.width = eachDivHeight; // variable
     });
     // event listener for mouseover to change bg to last color selected (red init):
-    addEdgeDivListeners(totalNumDiv, currentColor);
+    addEtchDivListeners(totalNumDiv, currentColor);
     // add column styling rules to the etchContainer grid:
     styleGrid(totalDimension, eachDivHeight);
     // put on page
     appendSiblings(etchContainer, etchDivArray);
-
 }
 
 function styleGrid(totalDimension, eachDivHeight) {
@@ -57,7 +56,8 @@ function styleGrid(totalDimension, eachDivHeight) {
             `repeat(${totalDimension}, ${eachDivHeight}px)`;
 }
 
-function addEdgeDivListeners(numDiv, bgColor) {
+// broke when tried forEach
+function addEtchDivListeners(numDiv, bgColor) {
     for (let i = 0; i < numDiv; i++) {
         etchDivArray[i].addEventListener('mouseover', () => {
             etchDivArray[i].style.backgroundColor = bgColor;
@@ -65,7 +65,8 @@ function addEdgeDivListeners(numDiv, bgColor) {
     }
 }
 
-function removeEdgeDivListeners(numDiv, oldColor) {
+// broke when tried forEach
+function removeEtchDivListeners(numDiv, oldColor) {
     for (let i = 0; i < numDiv; i++) {
         etchDivArray[i].removeEventListener('mouseover', () => {
             etchDivArray[i].style.backgroundColor = oldColor;
@@ -73,7 +74,7 @@ function removeEdgeDivListeners(numDiv, oldColor) {
     }
 }
 
-function removeEdgeDivs() {
+function removeEtchDivs() {
     etchDivArray.forEach(etchDiv => {
         etchDiv.remove();
     });    
@@ -86,27 +87,19 @@ add9Btn.addEventListener('click', () => {
     createEtchDivs(3);
 })
 
-const removeBtn = document.getElementById('removeBtn');
-removeBtn.addEventListener('click', removeEdgeDivs);
-
-
 const colorSelect = document.getElementById('colorSelect');
 addColorsToSelect('red', 'orange', 'yellow', 'green', 'blue', 'purple',
         'white', 'black', 'gray');
 colorSelect.addEventListener('change', (event) => {
-    console.log('pain');
-    let selectedColor = event.currentTarget.value;
     // this also removes old listener:
-    selectMouseoverColor(totalNumDiv, selectedColor); 
+    selectNewColor(totalNumDiv, event.currentTarget.value); 
 });
 
-function selectMouseoverColor(numDiv, color) {
-    removeEdgeDivListeners(numDiv, currentColor); // this is the old color we are
+function selectNewColor(numDiv, color) {
+    removeEtchDivListeners(numDiv, currentColor); // this is the old color we are
             // now removing
-    console.log(currentColor);
     currentColor = color; // reinit color
-    console.log(currentColor);
-    addEdgeDivListeners(numDiv, color);
+    addEtchDivListeners(numDiv, color);
 }
 
 // input list of colors to add to the dropdown, by english name
