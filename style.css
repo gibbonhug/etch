@@ -1,6 +1,15 @@
-#container {
+#contentContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    background-color: red;
+}
+
+#etchContainer {
     padding: 10px;
-    background-color: aqua;
+    background-color: gray;
     display: grid;
     grid-template-columns: repeat(16, 62px);
     grid-template-rows: repeat(16, 62px); /* unnecessary */
@@ -9,5 +18,12 @@
 }
 
 .etchDiv {
-    background-color: purple;
+    background-color: white;
+}
+
+#optionsContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 25px;
 }
