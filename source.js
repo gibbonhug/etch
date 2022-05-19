@@ -18,9 +18,14 @@ function calcDivHeight(dimension) {
     return Math.floor(containerHeight / dimension);
 }
 
+// divs are arranged in a square
+function calcDivNumber(dimension) {
+    return (dimension*dimension);
+}
+
 function createEtchDivs(dimension) {
     // calculate how many divs total we will make
-    let totalNumDiv = dimension * dimension; 
+    let totalNumDiv = calcDivNumber(dimension); 
     // calculate how large we want each div
     let divHeight = calcDivHeight(dimension); 
     // redo array to be new divs
