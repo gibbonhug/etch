@@ -1,0 +1,18 @@
+#container {
+    padding: 10px;
+    background-color: aqua;
+    display: grid;
+    grid-template-columns: repeat(16, 50px);
+    grid-template-rows: repeat(16, 50px); /* unnecessary */
+    gap: 2px;
+}
+
+.etchDiv {
+    background-color: purple;
+    height: 50px;
+    width: 50px;
+}
+
+.mousedOver {
+    background-color: green;
+}
