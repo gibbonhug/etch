@@ -5,9 +5,6 @@ import {
 } from './function.js'
 
 
-const btn = document.getElementById('btn');
-btn.addEventListener('click', removeEdgeDivs);
-
 const container = document.getElementById('container');
 const containerHeight = 500; // 500*500 space for our etch-a-sketch
 let etchDivArray = [];
@@ -75,7 +72,17 @@ function removeEdgeDivs() {
 // Init: 16*16
 createEtchDivs(16);
 
-const addBtn = document.getElementById('addBtn');
-addBtn.addEventListener('click', () => {
+
+// buttons 
+
+
+const add9Btn = document.getElementById('addBtn');
+add9Btn.addEventListener('click', () => {
     createEtchDivs(3);
 })
+
+const removeBtn = document.getElementById('removeBtn');
+btn.addEventListener('click', removeEdgeDivs);
+
+
+const colorBtn = document.getElementById('colorBtn');
