@@ -2,13 +2,14 @@
     padding: 10px;
     background-color: aqua;
     display: grid;
-    grid-template-columns: repeat(16, 50px);
-    grid-template-rows: repeat(16, 50px); /* unnecessary */
-    gap: 2px;
+    grid-template-columns: repeat(16, 62px);
+    grid-template-rows: repeat(16, 62px); /* unnecessary */
+    width: 1000px;
+    height: 1000px;
 }
 
 .etchDiv {
     background-color: purple;
-    height: 50px;
-    width: 50px;
+    height: 62px;
+    width: 62px;
 }

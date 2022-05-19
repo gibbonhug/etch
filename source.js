@@ -15,8 +15,8 @@ for (let i = 0; i < etchDivArray.length; i++) {
 etchDivArray.forEach(etchDiv => {
     etchDiv.innerText = 'hello div'
 });
-appendSiblings(container, etchDivArray); // put etchDivs in container
 
+appendSiblings(container, etchDivArray); // put etchDivs in container
 
 // event listener for mouseover to change bg:
 for (let i = 0; i < etchDivArray.length; i++) {
@@ -24,3 +24,8 @@ for (let i = 0; i < etchDivArray.length; i++) {
         etchDivArray[i].style.backgroundColor = 'green';
     });
 }
+
+const height = (1000);
+let totalRows = 16;
+let calculatedHeight = Math.floor(height / totalRows);
+console.log(calculatedHeight);
