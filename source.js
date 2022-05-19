@@ -4,6 +4,10 @@ import {
     appendSiblings, createSimilarElems,
 } from './function.js'
 
+
+const btn = document.getElementById('btn');
+btn.addEventListener('click', removeEdgeDivs);
+
 const container = document.getElementById('container');
 const containerHeight = 1000; // 1000*1000 space for our etch-a-sketch
 let etchDivArray = [];
@@ -43,12 +47,11 @@ function createEtchDivs(dimension) {
 
 }
 
-// Init:
-createEtchDivs(16);
-
-const btn = document.getElementById('btn');
-btn.addEventListener('click', () => {
+function removeEdgeDivs() {
     etchDivArray.forEach(etchDiv => {
         etchDiv.remove();
     });    
-})
+}
+
+// Init: 16*16
+createEtchDivs(16);
