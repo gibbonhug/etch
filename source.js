@@ -1,7 +1,7 @@
 'use strict';
 
 import {
-    appendSiblings, addMultipleClasses, addClassesToArray, removeMultipleClasses, removeClassesFromArray, createSimilarElems, isPositiveInteger, clearArrayInnerText
+    appendSiblings, createSimilarElems,
 } from './function.js'
 
 const container = document.getElementById('container');
