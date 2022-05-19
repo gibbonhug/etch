@@ -9,7 +9,7 @@ const btn = document.getElementById('btn');
 btn.addEventListener('click', removeEdgeDivs);
 
 const container = document.getElementById('container');
-const containerHeight = 1000; // 1000*1000 space for our etch-a-sketch
+const containerHeight = 500; // 500*500 space for our etch-a-sketch
 let etchDivArray = [];
 
 // divs are arranged in a square
@@ -23,13 +23,13 @@ function calcDivHeight(dimension) {
     return Math.floor(containerHeight / dimension);
 }
 
-function createEtchDivs(dimension) {
+function createEtchDivs(totalDimension) {
     // remove old divs
     removeEdgeDivs();
     // calculate how many divs total we will make
-    let totalNumDiv = calcDivNumber(dimension); 
+    let totalNumDiv = calcDivNumber(totalDimension); 
     // calculate how large we want each div
-    let divHeight = calcDivHeight(dimension); 
+    let eachDivHeight = calcDivHeight(totalDimension); 
     // reinit array to be new divs
     etchDivArray = [];
     etchDivArray = createSimilarElems('div', totalNumDiv, ['etchDiv']);
@@ -39,15 +39,23 @@ function createEtchDivs(dimension) {
     }
     // set size from calculated divHeight, and add text content:
     etchDivArray.forEach(etchDiv => {
-        etchDiv.style.height = divHeight; // variable
-        etchDiv.style.width = divHeight; // variable
-        etchDiv.innerText = 'hello div' // remove this later
+        etchDiv.style.height = eachDivHeight; // variable
+        etchDiv.style.width = eachDivHeight; // variable
     });
     // event listener for mouseover to change bg to green for now:
     addEdgeDivListeners(totalNumDiv, 'green');
+
+    // add column styling rules to the container grid:
+    styleGrid(totalDimension, eachDivHeight);
     // put on page
     appendSiblings(container, etchDivArray);
 
+}
+
+function styleGrid(totalDimension, eachDivHeight) {
+    container.style.gridTemplateRows = `repeat(${totalDimension}, ${eachDivHeight}px)`;
+    container.style.gridTemplateColumns = // technically unneccesary
+            `repeat(${totalDimension}, ${eachDivHeight}px)`;
 }
 
 function addEdgeDivListeners(numDiv, bgColor) {
@@ -66,3 +74,8 @@ function removeEdgeDivs() {
 
 // Init: 16*16
 createEtchDivs(16);
+
+const addBtn = document.getElementById('addBtn');
+addBtn.addEventListener('click', () => {
+    createEtchDivs(3);
+})

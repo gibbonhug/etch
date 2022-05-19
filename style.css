@@ -4,8 +4,8 @@
     display: grid;
     grid-template-columns: repeat(16, 62px);
     grid-template-rows: repeat(16, 62px); /* unnecessary */
-    width: 1000px;
-    height: 1000px;
+    width: 500px;
+    height: 500px;
 }
 
 .etchDiv {
