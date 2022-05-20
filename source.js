@@ -12,6 +12,9 @@ let etchDivArray = [];
 let totalNumDiv;
 let currentColor = 'red'; // init
 
+// Init: 16*16
+createEtchDivs(16);
+
 // divs are arranged in a square
 function calcDivNumber(dimension) {
     return (dimension*dimension);
@@ -82,11 +85,6 @@ function removeEtchDivs() {
 
 // buttons 
 
-const add9Btn = document.getElementById('add9Btn');
-add9Btn.addEventListener('click', () => {
-    createEtchDivs(3);
-})
-
 const colorSelect = document.getElementById('colorSelect');
 addColorsToSelect('red', 'orange', 'yellow', 'green', 'blue', 'purple',
         'white', 'black', 'gray');
@@ -126,9 +124,7 @@ hideSliderBtn.addEventListener('click', toggleSliderHidden);
 
 function toggleSliderHidden() {
     sliderContainer.classList.toggle('hidden');
-    addSliderBtn.classList.toggle('hidden');
+    showSliderBtn.classList.toggle('hidden');
     hideSliderBtn.classList.toggle('hidden');
 }
 
-// Init: 16*16
-createEtchDivs(16);

@@ -51,6 +51,7 @@ body {
 
 #toggleContainer {
     gap: 10px;
+    background: yellow;
 }
 
 #sliderContainer {
