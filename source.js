@@ -117,6 +117,18 @@ function addColorsToSelect(...colors) {
     })
 }
 
+const showSliderBtn = document.getElementById('showSliderBtn');
+const hideSliderBtn = document.getElementById('hideSliderBtn');
+const sliderContainer = document.getElementById('sliderContainer');
+
+showSliderBtn.addEventListener('click', toggleSliderHidden);
+hideSliderBtn.addEventListener('click', toggleSliderHidden);
+
+function toggleSliderHidden() {
+    sliderContainer.classList.toggle('hidden');
+    addSliderBtn.classList.toggle('hidden');
+    hideSliderBtn.classList.toggle('hidden');
+}
 
 // Init: 16*16
 createEtchDivs(16);

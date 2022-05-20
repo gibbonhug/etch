@@ -4,7 +4,7 @@ Element generating functions as well as isPositiveInt function
 
 /* Append a set of elements to the same parent
 Parameters can be elements or arrays of elements
-Returns an array of these siblings elements */
+Returns flat array of siblings regardless of array struc of input */
 function appendSiblings(elemParent, ...elemSiblings) {
     let siblingArray = [];
     elemSiblings.forEach(elem => { 
@@ -18,55 +18,71 @@ function appendSiblings(elemParent, ...elemSiblings) {
     return siblingArray;
 }
 
-/* Add multiple classes to one element
+/* Add multiple classes to singe element / array of elements
 Class parameters can be array of classes or classes
-Returns the element itself */
-function addMultipleClasses(elem, ...elemClasses) {
-    elemClasses.forEach((elemClass) => {
-        if (Array.isArray(elemClass)) { // passing in arrays of classes
-            addMultipleClasses(elem, ...elemClass);
+Returns the element/array of elements itself */
+function addClasses(elem, ...classes) {
+    if (Array.isArray(elem)) { // inputting array of elements instead of one element
+        elem.forEach((subElem) => {
+            addClasses(subElem, ...classes);
+            return; // do not attempt to add classes to array
+        });
+        return elem; // returning input array
+    }
+    classes.forEach((subClass) => {
+        if (Array.isArray(subClass)) { // passing in arrays of classes
+            addClasses(elem, ...subClass);
             return; // do not add array as a class
         }
-        elem.classList.add(elemClass);
+        elem.classList.add(subClass);
     });
-    return elem;
+    return elem; // returning single elem input
 }
 
-/* input a single element and multiple classes to remove
+
+/* input a single element or array of elements, and multiple classes to remove
 Class parameters can be array of classes or classes
-returns this element */
-function removeMultipleClasses(elem, ...elemClasses) {
-    elemClasses.forEach((elemClass) => {
-        if (Array.isArray(elemClass)) { // if inputting an array of classes as a param
-            removeMultipleClasses(elem, ...elemClass);
-            return; // do not attempt to remove full array as a class
+returns this element/array of elements */
+function removeClasses(elem, ...classes) {
+    if (Array.isArray(elem)) { // inputting array of elements instead of one element
+        elem.forEach((subElem) => {
+            removeClasses(subElem, ...classes);
+            return; // do not attempt to remove classes from array
+        });
+        return elem; // returning input array
+    }
+    classes.forEach((subClass) => {
+        if (Array.isArray(subClass)) { // passing in arrays of classes
+            removeClasses(elem, ...subClass);
+            return; // do not remove the array as a class
         }
-        elem.classList.remove(elemClass);
+        elem.classList.remove(subClass);
     });
-    return elem;
+    return elem; // returning single elem input
+}
+
+/* input a single element or array of elements, and multiple classes to remove
+Class parameters can be array of classes or classes
+returns this element/array of elements */
+function toggleClasses(elem, ...classes) {
+    if (Array.isArray(elem)) { // inputting array of elements instead of one element
+        elem.forEach((subElem) => {
+            toggleClasses(subElem, ...classes);
+            return; // do not attempt to remove classes from array
+        });
+        return elem; // returning input array
+    }
+    classes.forEach((subClass) => {
+        if (Array.isArray(subClass)) { // passing in arrays of classes
+            toggleClasses(elem, ...subClass);
+            return; // do not remove the array as a class
+        }
+        elem.classList.toggle(subClass);
+    });
+    return elem; // returning single elem input
 }
 
 
-/* add a class for an inputted array of elements
-dependant upon addMultipleClasses
-Returns the element array itself */
-
-function addClassesToArray(elemArray, ...elemClasses) {
-    elemArray.forEach((elem) => {
-        addMultipleClasses(elem, elemClasses);
-    });
-    return elemArray;
-}
-
-/* remove a class for an inputted array of elements
-dependant upon removeMultipleClasses
-Returns the element array itself */
-function removeClassesFromArray(elemArray, ...elemClasses) {
-    elemArray.forEach((elem) => {
-        removeMultipleClasses(elem, elemClasses);
-    });
-    return elemArray;
-}
 
 /* input a tag, number of elems to generate, array of
         classes to add, and id's
@@ -102,7 +118,7 @@ function createSimilarElems(tagName, numElem, classArray, ...elemIdList) {
             if (elemIdList[currentIndex] !== undefined) { // set its id if exists
                 currentElem.setAttribute('id', elemIdList[currentIndex]);
             }
-            addMultipleClasses(currentElem, classArray); // add the input classes
+            addClasses(currentElem, classArray); // add the input classes
             similarElemArray.push(currentElem);
         }
     }
@@ -110,10 +126,34 @@ function createSimilarElems(tagName, numElem, classArray, ...elemIdList) {
 }
 
 // clear inner text of array of (for ex.) paragraphs
-function clearArrayInnerText(array) {
-    array.forEach(elem => {
-        elem.innerText = '';
-    })
+// returns flat array of its parameters regardless of input struc
+function clearInnerText(...elems) {
+    let elemArray = [];
+    elems.forEach(subElem => {
+        if (Array.isArray(subElem)) { // input array as single param
+            clearInnerText(...subElem);
+            return; // do not set inner text of array itself
+        }
+        subElem.innerText = '';
+        elemArray.push(subElem); // flat array
+    });
+    return elemArray;
+}
+
+// specify inner text as first param
+// rest params is array or list of elements to set text to
+// returns array of elems with same structure as input 
+function setInnerText(text, ...elems) {
+    let elemArray = [];
+    elems.forEach(subElem => {
+        if (Array.isArray(subElem)) { // input array as single param
+            setInnerText(text, ...subElem);
+            return; // do not set inner text of array itself
+        }
+        subElem.innerText = text;
+        elemArray.push(subElem); // flat array
+    });
+    return elemArray;
 }
 
 // Returns a bool of if passed input is positive integer
@@ -126,5 +166,5 @@ function isPositiveInteger(num) {
 }
 
 export {
-    appendSiblings, addMultipleClasses, addClassesToArray, removeMultipleClasses, removeClassesFromArray, createSimilarElems, isPositiveInteger, clearArrayInnerText
+    appendSiblings, addClasses, removeClasses, toggleClasses, createSimilarElems, isPositiveInteger, clearInnerText, setInnerText
 }

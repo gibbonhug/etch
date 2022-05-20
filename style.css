@@ -1,16 +1,20 @@
+body {
+    margin: 0px; /* no white border */
+    font-family: sans-serif;
+}
+
 #contentContainer {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 25px;
     background-color: purple;
     min-height: 100vh; /* fill screen */
 }
 
 #etchContainer {
-    padding: 15px; /* 'border' of picture */
-    background-color: gray;
+    padding: 25px; /* 'border' of picture */
+    background-color: darkgray;
     display: grid;
     grid-template-columns: repeat(16, 62px);
     grid-template-rows: repeat(16, 62px); /* unnecessary */
@@ -27,25 +31,47 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 25px;
 }
 
 #optionsContainer {
     gap: 25px;
+    background-color: aquamarine;
+    width: 550px; /* same as etchContainer + padding */
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+.option:first-child {
+    margin-left: 25px;
+}
+
+.option:last-child {
+    margin-right: 25px;
+}
+
+#toggleContainer {
+    gap: 10px;
 }
 
 #sliderContainer {
-    gap: 10px;
+    gap: 5px;
 }
 
 #slider {
     -webkit-appearance: none;  /* Override default CSS styles */
     appearance: none;
+}
+
+.hidden {
+    display: none;
+}
+
+.opac {
     opacity: 0.8;
     -webkit-transition: .1s; /* 0.2 seconds transition on hover */
     transition: opacity .1s;
 }
 
-#slider:hover {
+.opac:hover {
     opacity: 1;
 }
