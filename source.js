@@ -23,7 +23,7 @@ function calcDivNumber(dimension) {
 // want each etchDiv to take up same amount of space in 500*500 etchContainer
 // all etchDivs are squares
 function calcDivHeight(dimension) {
-    return Math.floor(etchContainerHeight / dimension);
+    return Math.round(etchContainerHeight / dimension);
 }
 
 function createEtchDivs(totalDimension) {
