@@ -1,5 +1,7 @@
 'use strict';
 
+import './style.css';
+
 import {
     appendSiblings, createSimilarElems, getElem,
 } from './function.js'
