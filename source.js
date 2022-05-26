@@ -1,46 +1,46 @@
 'use strict';
 
 import {
-    appendSiblings, createSimilarElems,
+    appendSiblings, createSimilarElems, getElem,
 } from './function.js'
 
 
-const etchContainer = document.getElementById('etchContainer');
+const etchContainer = getElem('etchContainer');
 const etchContainerHeight = 500; // 500*500 space for our etch-a-sketch
 
 let etchDivArray = [];
-let totalNumDiv;
+let totalNumDiv = 0; // 0 before createEtchDivs
 let currentColor = 'red'; // init
 
 // Init: 16*16
 createEtchDivs(16);
 
-// divs are arranged in a square
+// divs are arranged in a square: input dimension as one side
 function calcDivNumber(dimension) {
     return (dimension*dimension);
 }
 
 // want each etchDiv to take up same amount of space in 500*500 etchContainer
-// all etchDivs are squares
+// (all etchDivs are squares)
 function calcDivHeight(dimension) {
     return Math.round(etchContainerHeight / dimension);
 }
 
+// input is side length of the total square of etchDivs
 function createEtchDivs(totalDimension) {
     // remove old divs
     removeEtchDivs();
     // calculate how many divs total we will make
     totalNumDiv = calcDivNumber(totalDimension); 
-    // calculate how large we want each div to be
+    // how large we want each div to be
     let eachDivHeight = calcDivHeight(totalDimension); 
     // reinit array to be new divs
-    etchDivArray = [];
     etchDivArray = createSimilarElems('div', totalNumDiv, ['etchDiv']);
     // add unique id's to the divs just because:
     for (let i = 0; i < totalNumDiv; i++) {
         etchDivArray[i].setAttribute('id', 'etchDiv' + i);
     }
-    // set size from calculated height:
+    // set size on each div from the calculated height:
     etchDivArray.forEach(etchDiv => {
         etchDiv.style.height = eachDivHeight; // variable
         etchDiv.style.width = eachDivHeight; // variable
@@ -53,6 +53,8 @@ function createEtchDivs(totalDimension) {
     appendSiblings(etchContainer, etchDivArray);
 }
 
+// takes num of rows / cols from side length of etch div square
+// then calculates how wide/long each row/col shuolud be
 function styleGrid(totalDimension, eachDivHeight) {
     etchContainer.style.gridTemplateRows = `repeat(${totalDimension}, ${eachDivHeight}px)`;
     etchContainer.style.gridTemplateColumns = // technically unneccesary
@@ -83,13 +85,15 @@ function removeEtchDivs() {
     });    
 }
 
-// buttons 
+// buttons :
 
-const colorSelect = document.getElementById('colorSelect');
+const colorSelect = getElem('colorSelect');
+// default options:
 addColorsToSelect('red', 'orange', 'yellow', 'green', 'blue', 'purple',
         'white', 'black', 'gray');
+// selecting a color for new mouseover,
+// this also removes old listener:
 colorSelect.addEventListener('change', (event) => {
-    // this also removes old listener:
     selectNewColor(totalNumDiv, event.currentTarget.value); 
 });
 
@@ -104,20 +108,20 @@ function selectNewColor(numDiv, color) {
 function addColorsToSelect(...colors) {
     colors.forEach(color => {
         // capitalization:
-        let colorStrLower = color.toLowerCase();
-        let colorStrCapital = (color[0].toUpperCase()) + (color.slice(1));
+        const colorStrLower = color.toLowerCase();
+        const colorStrCapital = (color[0].toUpperCase()) + (color.slice(1));
         // create the option
-        let colorOption = document.createElement('option');
+        const colorOption = document.createElement('option');
         colorOption.value = colorStrLower;
-        colorOption.text = colorStrCapital;
+        colorOption.text = colorStrCapital; // 'proper' capital for dropdown
         // add to the select list
         colorSelect.appendChild(colorOption);
     })
 }
 
-const showSliderBtn = document.getElementById('showSliderBtn');
-const hideSliderBtn = document.getElementById('hideSliderBtn');
-const sliderContainer = document.getElementById('sliderContainer');
+const showSliderBtn = getElem('showSliderBtn');
+const hideSliderBtn = getElem('hideSliderBtn');
+const sliderContainer = getElem('sliderContainer');
 
 showSliderBtn.addEventListener('click', toggleSliderHidden);
 hideSliderBtn.addEventListener('click', toggleSliderHidden);

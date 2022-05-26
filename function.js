@@ -165,6 +165,16 @@ function isPositiveInteger(num) {
     }
 }
 
+// input an element's id string to get this element
+    // if inputting an object will return the object
+// will return an element
+function getElem(destIdString) {
+    if (typeof destIdString === 'string') {
+        destIdString = document.getElementById(destIdString);
+    }
+    return destIdString;
+}
+
 export {
-    appendSiblings, addClasses, removeClasses, toggleClasses, createSimilarElems, isPositiveInteger, clearInnerText, setInnerText
+    appendSiblings, addClasses, removeClasses, toggleClasses, createSimilarElems, isPositiveInteger, clearInnerText, setInnerText, getElem
 }
