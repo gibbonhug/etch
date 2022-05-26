@@ -8,18 +8,18 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: purple;
+    background-color: rgb(46, 31, 31);
     min-height: 100vh; /* fill screen */
 }
 
 #etchContainer {
-    padding: 25px; /* 'border' of picture */
+    padding: 2.5vh; /* 'border' of picture */
     background-color: darkgray;
     display: grid;
     grid-template-columns: repeat(16, 62px);
     grid-template-rows: repeat(16, 62px); /* unnecessary */
-    width: 500px;
-    height: 500px;
+    width: 80vh;
+    height: 80vh;
 }
 
 .etchDiv {
@@ -34,28 +34,28 @@ body {
 }
 
 #optionsContainer {
-    gap: 25px;
-    background-color: aquamarine;
-    width: 550px; /* same as etchContainer + padding */
-    padding-top: 25px;
-    padding-bottom: 25px;
+    gap: 2.5vh;
+    background-color: rgb(156, 156, 156);
+    width: 85vh; /* same as etchContainer + padding */
+    padding-top: 2.5vh;
+    padding-bottom: 2.5vh;
 }
 
 .option:first-child {
-    margin-left: 25px;
+    margin-left: 2.5vh;
 }
 
 .option:last-child {
-    margin-right: 25px;
+    margin-right: 2.5vh;
 }
 
 #toggleContainer {
-    gap: 10px;
-    background: yellow;
+    gap: 1vh;
+    background: rgb(212, 212, 212);
 }
 
 #sliderContainer {
-    gap: 5px;
+    gap: 0.5vh;
 }
 
 #slider {

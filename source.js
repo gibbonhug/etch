@@ -6,14 +6,12 @@ import {
 
 
 const etchContainer = getElem('etchContainer');
-const etchContainerHeight = 500; // 500*500 space for our etch-a-sketch
+const etchContainerHeight = 80; // 80vh*80vh space for our etch-a-sketch
 
 let etchDivArray = [];
 let totalNumDiv = 0; // 0 before createEtchDivs
 let currentColor = 'red'; // init
 
-// Init: 16*16
-createEtchDivs(16);
 
 // divs are arranged in a square: input dimension as one side
 function calcDivNumber(dimension) {
@@ -23,7 +21,7 @@ function calcDivNumber(dimension) {
 // want each etchDiv to take up same amount of space in 500*500 etchContainer
 // (all etchDivs are squares)
 function calcDivHeight(dimension) {
-    return Math.round(etchContainerHeight / dimension);
+    return (etchContainerHeight / dimension);
 }
 
 // input is side length of the total square of etchDivs
@@ -56,9 +54,9 @@ function createEtchDivs(totalDimension) {
 // takes num of rows / cols from side length of etch div square
 // then calculates how wide/long each row/col shuolud be
 function styleGrid(totalDimension, eachDivHeight) {
-    etchContainer.style.gridTemplateRows = `repeat(${totalDimension}, ${eachDivHeight}px)`;
+    etchContainer.style.gridTemplateRows = `repeat(${totalDimension}, ${eachDivHeight}vh)`;
     etchContainer.style.gridTemplateColumns = // technically unneccesary
-            `repeat(${totalDimension}, ${eachDivHeight}px)`;
+            `repeat(${totalDimension}, ${eachDivHeight}vh)`;
 }
 
 // broke when tried forEach
@@ -119,6 +117,8 @@ function addColorsToSelect(...colors) {
     })
 }
 
+
+// change dimension of etch's: slider
 const showSliderBtn = getElem('showSliderBtn');
 const hideSliderBtn = getElem('hideSliderBtn');
 const sliderContainer = getElem('sliderContainer');
@@ -132,3 +132,16 @@ function toggleSliderHidden() {
     hideSliderBtn.classList.toggle('hidden');
 }
 
+const slider = getElem('slider');
+const sliderText = getElem('sliderText');
+
+slider.oninput = function () {
+    createEtchDivs(slider.value);
+    sliderText.innerText = slider.value + 'x' + slider.value;
+}
+
+
+// Init: 16*16
+createEtchDivs(16);
+slider.value = 16;
+sliderText.innerText = slider.value + 'x' + slider.value;
